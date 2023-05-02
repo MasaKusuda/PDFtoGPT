@@ -2,9 +2,13 @@
 
 ## docker 
 
-### コンテナ起動
+### コンテナ初回起動
 
 `docker-compose up -d`
+
+### コンテナ起動
+
+`docker-compose start`
 
 ### コンテナに接続
 
@@ -12,5 +16,6 @@
 
 ### コンテナの終了
 
-`docker-compose down`
+`docker-compose stop`
+downにするとコンテナ消えるので注意
 
