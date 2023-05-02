@@ -10,4 +10,7 @@
 
 `docker-compose exec flask /bin/bash`
 
+### コンテナの終了
+
+`docker-compose down`
 
