@@ -5,7 +5,7 @@ app = Flask(__name__)
 # @app.route("hoge")などで指定すると、http://127.0.0.1:5000/hogeでの動作を記述できる。
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return "Hello World!by wakumoto"
 
 if __name__ == "__main__":
     # webサーバー立ち上げ
