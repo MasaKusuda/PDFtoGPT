@@ -5,7 +5,8 @@ services:
     ports:
       - "8000:5000"
     volumes:
-      - .:/code
+      - .:/home/developper/code
     tty: true
+    user: developper
 
 
