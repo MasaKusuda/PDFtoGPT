@@ -19,3 +19,10 @@
 `docker-compose stop`
 downにするとコンテナ消えるので注意
 
+## Python
+
+### webfront起動
+
+`python3 app.py`
+
+
