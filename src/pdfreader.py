@@ -14,3 +14,5 @@ for line in pdf_text[:10]:
 print("最後の10行を出力")
 for line in pdf_text[-10:]:
     print(line)
+
+# %%
