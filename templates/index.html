@@ -19,6 +19,21 @@
               data: { input_text: inputText },
               success: function(response) {
                   $('#result').append("<p>GPT:"+response["response_text"]+"</p>");
+                  $('#tokens').html(response["token_used_percentage"]+"% token is used.")
+                  scrollToBottom();
+              }
+          });
+      });
+    });
+
+    $(document).ready(function() {
+      $('#reset-btn').on('click', function() {
+          $.ajax({
+              url: '/reset',
+              method: 'POST',
+              data: { nodata:"" },
+              success: function(response) {
+                  $('#tokens').html("0% token is used.")
                   scrollToBottom();
               }
           });
@@ -89,7 +104,17 @@
             <form id="text-form">
               <textarea name="input_text" id="input_text" rows="3" style="width:100%"></textarea>
               <br>
-              <button type="button" id="submit-btn">Submit</button>
+              <div class="row">
+                <div class="col-md-4">
+                  <button type="button" id="submit-btn">Submit</button>
+                </div>
+                <div class="col-md-4" id="tokens">
+                  0 % token is used.
+                </div>
+                <div class="col-md-4">
+                  <button type="button"  id="reset-btn">Reset</button>
+                </div>
+              </div>
             </form>
           </div>
         </div>

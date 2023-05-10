@@ -1,7 +1,4 @@
-import os
 import openai
-openai.api_key_path = "env"
-print(openai.Model.list())
 from pdfminer.high_level import extract_text
 
 def read_pdf_to_text(file_path):
