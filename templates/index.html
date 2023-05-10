@@ -6,16 +6,45 @@
     $(document).ready(function() {
       $('#submit-btn').on('click', function() {
           const inputText = $('#input_text').val();
+          $('#input_text').val('');
+          if ($('#result').text() === '\n            Empty...\n          '){
+            $('#result').html("")
+          }
+          $('#result').append("<p>YOU:"+inputText+"</p>");
+          $('#result').append("<p>GPT:generating...</p>");
+          scrollToBottom();
           $.ajax({
               url: '/process',
               method: 'POST',
               data: { input_text: inputText },
               success: function(response) {
-                  $('#result').html(response);
+                  $('#result').append("<p>GPT:"+response+"</p>");
+                  scrollToBottom();
               }
           });
       });
     });
+
+        
+      function scrollToBottom() {
+        const textBox = $('#result');
+        textBox.scrollTop(textBox.prop('scrollHeight'));
+      }
+
+    $(document).ready(function() {
+      $('#input_text').keydown(function(e){
+        //ctrlキーが押されてる状態か判定
+        if(event.ctrlKey){
+          //押されたキー（e.keyCode）が13（Enter）か　そしてテキストエリアに何かが入力されているか判定
+          if(e.keyCode === 13 && $(this).val()){
+            //フォームを送信
+            $('#submit-btn').click();
+            return false;
+              }
+          }
+        });
+    });
+
   </script>
 </head>
 
@@ -46,28 +75,22 @@
       <div class="col-md-6">
         <div class="row">
           {% if pdf_text %}
-            <div style="width:100%;height:400px;border:none;overflow:auto;">
+            <div style="width:100%;height:300px;border:none;overflow:auto;">
                 {{pdf_text}}
             </div>
           {% endif %}
         </div>
         <hr>
         <div class="row">
-          <div class="form-group" style="width:100%;height:200px;border:none;overflow:auto;">
+          <div id="result" style="width:100%;height:200px;border:none;overflow:auto;">
+            Empty...
+          </div>
+          <div class="form-group" style="width:100%;height:100px;border:none;">
             <form id="text-form">
-              <textarea name="input_text" id="input_text" rows="10" cols="30"></textarea>
+              <textarea name="input_text" id="input_text" rows="3" style="width:100%"></textarea>
               <br>
               <button type="button" id="submit-btn">Submit</button>
             </form>
-            <div id="result">何も来てないンゴｗ</div>
-            <!-- <div class="col">
-              <label for="textarea">テキスト:</label>
-            </div>
-            <div class="col">
-              <button class="btn btn-primary">
-                送信
-              </button>
-            </div> -->
           </div>
         </div>
       </div>

@@ -9,6 +9,7 @@ app.debug = True
 app.config["UPLOAD_FOLDER"] = "./uploads"
 Bootstrap(app)
 messages=[]
+token_sum=0
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -45,6 +46,7 @@ def process():
     res_content = res["choices"][0]["message"]["content"]
     messages.append({"role":res_role,"content":res_content})
     response_text = res_content
+    token_sum = token_sum + res["usage"]["total_tokens"]
     return jsonify(response_text)
 
 
