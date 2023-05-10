@@ -3,13 +3,12 @@ from flask_bootstrap import Bootstrap
 from src import api_test
 import os
 app = Flask(__name__)
-app.debug = True
-# http://127.0.0.1:5000をルートとして、("")の中でアクセスポイント指定
-# @app.route("hoge")などで指定すると、http://127.0.0.1:5000/hogeでの動作を記述できる。
+app.debug = False
 app.config["UPLOAD_FOLDER"] = "./uploads"
 Bootstrap(app)
 messages=[]
 token_sum=0
+token_MAX=4096
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -46,8 +45,14 @@ def process():
     res_content = res["choices"][0]["message"]["content"]
     messages.append({"role":res_role,"content":res_content})
     response_text = res_content
-    token_sum = token_sum + res["usage"]["total_tokens"]
-    return jsonify(response_text)
+    token_sum = token_sum + int(res["usage"]["total_tokens"])
+    token_used_percentage = int((token_sum / token_MAX)*100) 
+    response={
+        "response_text":response_text,
+        "token_sum":token_sum,
+        "token_used_percentage":token_used_percentage
+    }
+    return jsonify(response)
 
 
 # @app.route('/upload', methods=['GET', 'POST'])
@@ -58,4 +63,4 @@ def process():
 
 if __name__ == "__main__":
     # webサーバー立ち上げ
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8000)

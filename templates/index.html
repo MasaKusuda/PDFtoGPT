@@ -18,7 +18,7 @@
               method: 'POST',
               data: { input_text: inputText },
               success: function(response) {
-                  $('#result').append("<p>GPT:"+response+"</p>");
+                  $('#result').append("<p>GPT:"+response["response_text"]+"</p>");
                   scrollToBottom();
               }
           });
