@@ -55,6 +55,7 @@ virtualenv = "==20.23.0"
 virtualenv-clone = "==0.5.7"
 wcwidth = "==0.2.6"
 werkzeug = "==2.3.3"
+openai = "*"
 
 [dev-packages]
 

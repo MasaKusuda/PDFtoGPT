@@ -1,4 +1,8 @@
 __pycache__
 .vscode
 Pipfile.lock
+<<<<<<< Updated upstream
 
+=======
+env
+>>>>>>> Stashed changes
