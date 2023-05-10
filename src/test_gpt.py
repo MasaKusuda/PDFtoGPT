@@ -28,5 +28,3 @@ messages.append({"role": "assistant", "content": response["choices"][0]["message
 
 # PDFfile to text
 # pdf_text = extract_text('../sample.pdf')
-
-# %%
