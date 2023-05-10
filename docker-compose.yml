@@ -3,7 +3,7 @@ services:
   flask:
     build: .
     ports:
-      - "8000:5000"
+      - "8000:8000"
     volumes:
       - .:/home/developper/code
     tty: true

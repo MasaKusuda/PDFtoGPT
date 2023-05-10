@@ -3,19 +3,24 @@ import openai
 openai.api_key_path = "env"
 print(openai.Model.list())
 from pdfminer.high_level import extract_text
+
 def read_pdf_to_text(file_path):
-  return extract_text(file_path).replace('\n','')
+  return extract_text(file_path)
+
+def access_to_GPT(messages=None):
+  return_obj = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=messages
+  )
+  print(return_obj["choices"][0]["message"]["content"])
+  print(return_obj["usage"])
+  return return_obj
+
+
 
 # pdf_text = extract_text('../sample.pdf').replace('\n','')
 
-# return_obj = openai.ChatCompletion.create(
-#   model="gpt-3.5-turbo",
-#   messages=[
-#         {"role": "user", "content": "compress the below content. " + pdf_text},
-#     ]
-# )
-# print(return_obj["choices"][0]["message"]["content"])
-# print(return_obj["usage"])
+
 
 # compressd_context = return_obj["choices"][0]["message"]["content"]
 # return_obj = openai.ChatCompletion.create(
