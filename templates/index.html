@@ -1,0 +1,40 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}PDFアップロード{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>PDFアップロード</h1>
+        <form method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="file" name="pdf" accept="application/pdf" required>
+          </div>
+          <button type="submit" class="btn btn-primary">アップロード</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        {% if filename %}
+            <iframe src="{{ url_for('uploaded_file', filename=filename) }}" width="100%" height="600" style="border: none;"></iframe>
+        {% endif %}
+      </div>
+      <div class="col-md-6">
+        <div >
+        {% if pdf_text %}
+            <div>
+                {{pdf_text}}
+            </div>
+        {% endif %}
+        </div>
+        <div class="form-group">
+          <label for="textarea">テキスト:</label>
+          <textarea class="form-control" rows="15" id="textarea"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
