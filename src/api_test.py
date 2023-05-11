@@ -1,6 +1,7 @@
 import os
 import openai
 openai.api_key_path = "env"
+# openai.api_key = os.getenv("OPENAI_API_KEY")
 print(openai.Model.list())
 from pdfminer.high_level import extract_text
 
